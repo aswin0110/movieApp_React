@@ -1,5 +1,7 @@
 const express = require('express')
 const cors = require('cors')
+const path = require('path');
+
 
 const app = express()
 
@@ -7,6 +9,7 @@ app.use(cors())
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 
+app.use(express.static(path.join(__dirname,'/build'))); 
 
 const MovieModel = require('./model/MovieModel')
 
@@ -75,7 +78,9 @@ app.put('/api/movie/:id', async (req,res)=>{
 })
 
 
-
+app.get('/*', function(req, res) { 
+    res.sendFile(path.join(__dirname 
+    ,'/build/index.html')); }); 
 
 
 
